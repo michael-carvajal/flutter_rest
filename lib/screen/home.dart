@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rest/screen/second_screen.dart';
 import 'package:flutter_rest/services/users_api.dart';
 
 import '../model/user.dart';
@@ -40,11 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildWelcomeMessage() {
-    return Text(
-      'Click on referesh button to load users',
-      style: TextStyle(fontSize: 24.0, backgroundColor: Colors.amber[500]),
-      textAlign: TextAlign.center,
-    );
+    return ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const SecondScreen()));
+        },
+        child: const Text("To Second Page screen"));
   }
 
   Widget buildUserListView() {
