@@ -4,7 +4,7 @@ import 'package:flutter_rest/services/users_api.dart';
 import '../model/user.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -24,23 +24,27 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.amber[500],
         shadowColor: Colors.amber[900],
         title: const Text('Rest Api Call'),
+        actions: [
+          IconButton(
+            icon: Icon(dataLoaded ? Icons.home : Icons.refresh),
+            onPressed: () {
+              toggleData();
+            },
+          ),
+        ],
       ),
       body: Center(
-        child: dataLoaded
-            ? buildUserListView() // Show ListView if data is loaded
-            : buildWelcomeMessage(), // Show welcome message otherwise
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          fetchData(); 
-        },
-        child: const Icon(Icons.refresh),
+        child: dataLoaded ? buildUserListView() : buildWelcomeMessage(),
       ),
     );
   }
 
   Widget buildWelcomeMessage() {
-    return const Text('Welcome to the App!');
+    return Text(
+      'Click on referesh button to load users',
+      style: TextStyle(fontSize: 24.0, backgroundColor: Colors.amber[500]),
+      textAlign: TextAlign.center,
+    );
   }
 
   Widget buildUserListView() {
@@ -74,28 +78,14 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
+
+  void toggleData() {
+    if (dataLoaded) {
+      setState(() {
+        dataLoaded = false; // Set dataLoaded to false to show welcome message
+      });
+    } else {
+      fetchData(); // Fetch data if not already loaded
+    }
+  }
 }
-
-
-  // void fetchUsers() async {
-  //   print('fetch users found');
-  //   const url = 'https://randomuser.me/api/?results=100';
-  //   final uri = Uri.parse(url);
-  //   final response = await http.get(uri);
-  //   final body = response.body;
-  //   final json = jsonDecode(body);
-  //   final results = json['results'] as List<dynamic>;
-  //   final transformed = results.map((user) {
-  //     return User(
-  //       cell: user['cell'],
-  //       email: user['email'],
-  //       phone: user['phone'],
-  //       nat: user['nat'],
-  //       gender: user['gender'],
-  //       picture: user['picture'],
-  //     );
-  //   }).toList();
-  //   setState(() {
-  //     users = transformed;
-  //   });
-  // }
