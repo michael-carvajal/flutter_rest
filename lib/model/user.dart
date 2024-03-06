@@ -4,6 +4,7 @@ class User {
   final String phone;
   final String cell;
   final String nat;
+  final dynamic picture;
 
   User({
     required this.gender,
@@ -11,5 +12,6 @@ class User {
     required this.phone,
     required this.cell,
     required this.nat,
+    required this.picture,
   });
 }
