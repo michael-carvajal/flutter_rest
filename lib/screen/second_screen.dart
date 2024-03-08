@@ -27,18 +27,21 @@ class _SecondScreenState extends State<SecondScreen> {
                 children: [
                   Text(
                     joke['setup'],
-                    style: const TextStyle(fontSize: 24.0),
+                    style: const TextStyle(fontSize: 48.0),
+                    textAlign: TextAlign.center,
                   ),
                   showPunchline
                       ? Text(joke['punchline'],
                           style: const TextStyle(fontSize: 24.0))
-                      : ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              showPunchline = true;
-                            });
-                          },
-                          child: const Text('Reveal Punchline'))
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 100.0),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  showPunchline = true;
+                                });
+                              },
+                              child: const Text('Reveal Punchline')))
                 ],
               ),
             )
