@@ -5,7 +5,7 @@ import 'package:flutter_rest/services/users_api.dart';
 import '../model/user.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
